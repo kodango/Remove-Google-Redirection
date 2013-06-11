@@ -1,0 +1,36 @@
+{
+  "default_locale": "en",
+
+  "name": "__MSG_ext_name__",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "__MSG_ext_desc__",
+
+  "content_scripts": [ {
+    "all_frames": true,
+    "js": [ "/content.js" ],
+    "matches": ["http://*/*", "https://*/*"],
+    "include_globs": [ "http?://www.google.*/", "http?://www.google.*/#hl=*",
+                 "http?://www.google.*/search*", "http?://www.google.*/webhp?hl=*",
+                 "https://encrypted.google.*/", "https://encrypted.google.*/#hl=*",
+                 "https://encrypted.gogole.*/search*", "https://encrypted.google.*/webhp?hl=*",
+                 "http://ipv6.google.com/", "http://ipv6.google.com/search*"
+                  ],
+    "exclude_globs": ["*tbm=pts", "*tbm=shop*", "*tbm=isch*", "*tbm=bks*"],
+    "run_at": "document_start"
+  } ],
+
+  "icons": {
+    "16": "/img/icon-16.png",
+    "32": "/img/icon-32.png",
+    "48": "/img/icon-48.png",
+    "64": "/img/icon-64.png",
+    "128": "/img/icon-128.png"
+  },
+
+  "permissions": [
+      "https://*/*", "http://*/*", "clipboardWrite"
+  ],
+
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

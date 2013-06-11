@@ -1,0 +1,9 @@
+{
+    "ext_name": {
+        "message": "Remove Google Redirection"
+    },
+
+    "ext_desc": {
+        "message": "Remove redirection and click-tracking in Google search results"
+    }
+}
