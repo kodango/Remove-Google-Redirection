@@ -1,9 +1,9 @@
 {
     "ext_name": {
-        "message": "删除Google重定向"
+        "message": "删除谷歌重定向"
     },
 
     "ext_desc": {
-        "message": "删除Google搜索结果链接重定向, 同时防止点击追踪"
+        "message": "删除谷歌搜索结果链接重定向, 同时防止点击追踪"
     }
 }
