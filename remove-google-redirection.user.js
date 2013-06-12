@@ -1,11 +1,11 @@
 // ==UserScript==
 // @id             remove_google_redirection
 // @name           Remove Google Redirection
-// @namespace      http://kodango.me
+// @namespace      http://kodango.com
 // @description    Remove redirection and click-tracking in Google search results.
 // @author         tuantuan <dangoakachan@gmail.com>
-// @homepage       http://kodango.me
-// @version        0.9.3
+// @homepage       http://kodango.com
+// @version        0.9.4
 // @include        http*://www.google.*/
 // @include        http*://www.google.*/#hl=*
 // @include        http*://www.google.*/search*
@@ -54,15 +54,14 @@
      */
 
     var config = set_default('dangoGoogleRR', {
-        'quiet': false, // Enable debug messages
+        'quiet': true, // Enable debug messages
         'new_tab': true, // Open link in new tab, override google search setting
         'selector': '#res a, #rhs a', // Selector for links to be processed
     });
 
-    /* 
-     * User config section end 
+    /*
+     * Debug log function
      */
-
     var debug = config.quiet ? function(msg) {} :
         function(msg) { console.log(msg); };
 
@@ -83,14 +82,12 @@
     }
 
     /*
-     * Shorthand functions
+     * Shorthand for decodeURIComponent
      */
-    //function $(id) { return document.getElementById(id); }
     function dec(s) { return window.decodeURIComponent(s); }
 
     /* Set the link to be openned in new or current tab */
     function setOpenInNewTab(link) { link.setAttribute('target', '_blank'); }
-    function setOpenInCurTab(link) { link.setAttribute('target', '_self'); }
 
     /* 
      * Removes click-tracking and restores redirection URL to original one.
@@ -105,8 +102,6 @@
 
         if (config.new_tab) 
             setOpenInNewTab(link);
-        else
-            setOpenInCurTab(link);
 
         /*
          * If the link contains click-tracking code, we should remove it. Otherwise,
@@ -133,16 +128,14 @@
     function removeRedirect(event) {
         /* Queries all result links */
         var links = document.querySelectorAll(config.selector);
-        var len = links.length;
-        var process_num = 0;
+        var len = links.length, process_num = 0;
 
         /* Iterates each link that found in the result and clean it */
         for (var i = 0; i < len; i++) {
             process_num += cleanLink(links[i]);
         }
 
-        debug('removeRedirect processes ' + process_num + ' links, event type is '
-                + event.type);
+        debug('remove ' + process_num + ' links, event type is ' + event.type);
     }
 
     /*
@@ -219,13 +212,15 @@
         /*
          * Listens the click event on image link, try to open images in new tab
          */
-        document.addEventListener('click', function(event) {
-            var target = event.target;
+        if (config.new_tab) {
+            document.addEventListener('click', function(event) {
+                var target = event.target;
 
-            if (target.id == 'uh_hpl' || target.id == 'rg_hl') {
-                setOpenInNewTab(target);
-            }
-        }, false);
+                if (target.id == 'uh_hpl' || target.id == 'rg_hl') {
+                    setOpenInNewTab(target);
+                }
+            }, false);
+        }
     }
 
     listenEvents();
