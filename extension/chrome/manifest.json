@@ -2,7 +2,7 @@
   "default_locale": "en",
 
   "name": "__MSG_ext_name__",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "manifest_version": 2,
   "description": "__MSG_ext_desc__",
 
@@ -16,8 +16,7 @@
                  "https://encrypted.gogole.*/search*", "https://encrypted.google.*/webhp?hl=*",
                  "http://ipv6.google.com/", "http://ipv6.google.com/search*"
                   ],
-    "exclude_globs": ["*tbm=pts*", "*tbm=shop*", "*tbm=isch*", "*tbm=bks*"],
-    "run_at": "document_start"
+    "run_at": "document_end"
   } ],
 
   "icons": {
@@ -29,7 +28,7 @@
   },
 
   "permissions": [
-      "https://*/*", "http://*/*", "clipboardWrite"
+      "https://*/*", "http://*/*"
   ],
 
   "content_security_policy": "script-src 'self'; object-src 'self'"
