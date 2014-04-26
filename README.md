@@ -3,7 +3,7 @@ Introduction
 
 Prohibit click-tracking, and prevent url redirection when clicks on the result links in Google search page.
 
-See more help on my [script homepage](http://kodango.com/remove-google-redirection)
+Script homepage: [English](http://kodango.com/remove-google-redirection) or [Chinese](http://kodango.com/remove-google-redirection-extension)
 
 Browser Support
 ===============
