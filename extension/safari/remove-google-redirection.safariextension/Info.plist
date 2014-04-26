@@ -55,6 +55,8 @@
 			<string>Some</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://raw.githubusercontent.com/dangoakachan/Remove-Google-Redirection/master/extension/safari/update.plist</string>
 	<key>Website</key>
 	<string>http://kodango.com/remove-google-redirection</string>
 </dict>
