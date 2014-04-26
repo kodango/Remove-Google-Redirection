@@ -1,7 +1,7 @@
 Remove-Google-Redirection
 =========================
 
-Remove redirection and click-tracking in Google search results.
+Prohibit click-tracking, and prevent url redirection when clicks on the result links in Google search page.
 
 See more help on my [script homepage](http://kodango.com/remove-google-redirection)
 
