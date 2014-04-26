@@ -1,17 +1,10 @@
 /*
- * Content Script
+ * Name: Remove Google Redirection
  *
  * Description:
  * 
- * This script disable click-tracking and redirection in Google search results,
- * and restore the result url from
- *
- *      "http://www.google.com/url?url=http://example.com"
- * to
- * 
- *      "http://example.com"
- *
- * Now Support both http and https search, instant-on and instant-off search.
+ * Prohibit click-tracking, and prevent url redirection when clicks on the 
+ * result links in Google search page.
  */
 
 /*
@@ -22,70 +15,70 @@
     "use strict";
 
     /*
-     * Override the rwt function
+     * Inject the function into current document and run it
      */
-    function overrideRwt() {
+    function injectFunction(func) {
         var ele = document.createElement('script');
+      　var s = document.getElementsByTagName('script')[0];
 
         ele.type = 'text/javascript';
+        ele.textContent = '(' + func + ')();';
 
-        /* Inject the function into document */
-        function injectFunc() {
+        s.parentNode.insertBefore(ele, s);
+    }
+
+    /*
+     * Disable the url rewrite function
+     */
+    function disableURLRewrite() {
+        function inject_init() {
+            /* Define the url rewrite function */
             Object.defineProperty(window, 'rwt', {
                 value: function() { return true; },
-                writable: false,
+                writable: false, // set the property to read-only
                 configurable: false
             });
         }
 
-        ele.textContent = '(' + injectFunc + ')()';
-        document.body.appendChild(ele);
+        injectFunction(inject_init);
     }
 
     /*
-     * Clean the link and prevent the url to be rewritten
+     * Clean the link, no track and no url redirection
      */
-    function cleanTheLink(event) {
-        var a = event.target, depth = 1;
-
-        /* Found the target link, and try to clean it */
-        while (a && a.tagName != 'A' && depth-- > 0)
-            a = a.parentNode;
-
-        if (!a || a.tagName != 'A')
-           return;
-
-        if (a.dataset['cleaned'] == 1) // Return if a link has been already cleaned
+    function cleanTheLink(a) {
+        if (a.dataset['cleaned'] == 1) // Already cleaned
             return;
 
+        /* Set clean flag */
         var need_clean = false;
 
         /* Find the original url */
         var result = /\/(?:url|imgres).*[&?](?:url|q|imgurl)=([^&]+)/i.exec(a.href);
 
-        /* Restores the redirection url */
         if (result) {
-            a.href = decodeURIComponent(result[1]);
             need_clean = true;
+            a.href = result[1]; // Restore url to original one
         }
 
+        /* Remove the onmousedown attribute if found */
         var val = a.getAttribute('onmousedown') || '';
 
-        /* Remove the onmousedown attribute */
         if (val.indexOf('return rwt(') != -1) {
-            a.removeAttribute('onmousedown');
             need_clean = true;
+            a.removeAttribute('onmousedown');
         }
-                        
+
+        /* FIXME: check the link class name */
         var cls = a.className || '';
 
-        if (cls.indexOf('irc_') != -1)
-            need_clean = true;
+        if (cls.indexOf('irc_') != -1) need_clean = true;
 
-        /* Remove all event listener from the element */
-        if (need_clean) { 
+        /*
+         * Remove all event listener added to this link
+         */ 
+        if (need_clean) {
             var clone = a.cloneNode(true);
-
             a.parentNode.replaceChild(clone, a);
             clone.dataset['cleaned'] = 1;
         }
@@ -96,8 +89,18 @@
      */
     function main()
     {
-        overrideRwt();
-        document.addEventListener('mouseover', cleanTheLink, true);
+        disableURLRewrite();
+
+        document.addEventListener('mouseover', function (event) {
+            var a = event.target, depth = 1;
+
+            /* Found the target link, and try to clean it */
+            while (a && a.tagName != 'A' && depth-- > 0)
+                a = a.parentNode;
+
+            if (a && a.tagName == 'A')
+                cleanTheLink(a);
+        }, true);
     }
 
     main();
