@@ -5,7 +5,7 @@
 	<key>Author</key>
 	<string>kodango</string>
 	<key>Builder Version</key>
-	<string>8536.30.1</string>
+	<string>9537.75.14</string>
 	<key>CFBundleDisplayName</key>
 	<string>remove-google-redirection</string>
 	<key>CFBundleIdentifier</key>
@@ -13,15 +13,19 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.1.0</string>
 	<key>Chrome</key>
 	<dict/>
 	<key>Content</key>
 	<dict>
 		<key>Scripts</key>
 		<dict>
+			<key>End</key>
+			<array>
+				<string>remove-google-redirection.user.js</string>
+			</array>
 			<key>Start</key>
 			<array>
 				<string>inject.js</string>
@@ -29,7 +33,7 @@
 		</dict>
 	</dict>
 	<key>Description</key>
-	<string>Remove redirection and click-tracking in Google search results.</string>
+	<string>Prohibit click-tracking, and prevent url redirection in Google search results</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>

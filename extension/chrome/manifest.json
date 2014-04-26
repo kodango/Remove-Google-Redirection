@@ -8,7 +8,7 @@
 
   "content_scripts": [ {
     "all_frames": true,
-    "js": [ "/content.js" ],
+    "js": [ "/remove-google-redirection.user.js" ],
     "matches": ["http://*/*", "https://*/*"],
     "include_globs": [ "http?://www.google.*/", "http?://www.google.*/#hl=*",
                  "http?://www.google.*/search*", "http?://www.google.*/webhp?hl=*",

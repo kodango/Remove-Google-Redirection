@@ -4,6 +4,6 @@
     },
 
     "ext_desc": {
-        "message": "Remove redirection and click-tracking in google search results"
+        "message": "Prohibit click-tracking, and prevent url redirection when clicks on the  result links in Google search page"
     }
 }
