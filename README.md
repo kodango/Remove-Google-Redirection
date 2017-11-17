@@ -22,4 +22,4 @@ Download from AMO: [Remove Google Redirection for Firefox](https://addons.mozill
 
  * Any other browsers which support GreaseMonkey:
 
-Download from Github: [Remove Google Redirection for Greasemonkey](https://github.com/dangoakachan/Remove-Google-Redirection/raw/master/extension/firefox/remove-google-redirection.user.js)
+Download from Github: [Remove Google Redirection for Greasemonkey](https://github.com/dangoakachan/Remove-Google-Redirection/raw/master/extension/greasemonkey/remove-google-redirection.user.js)
