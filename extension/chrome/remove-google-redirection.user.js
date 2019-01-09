@@ -58,7 +58,8 @@
 
         if (result) {
             need_clean = true;
-            a.href = result[1]; // Restore url to original one
+            a.href = decodeURIComponent(result[1]); // Restore url to original one
+
         }
 
         /* Remove the onmousedown attribute if found */
