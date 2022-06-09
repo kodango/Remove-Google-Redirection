@@ -16,7 +16,7 @@
 // @include        https://encrypted.google.com/webhp?hl=*
 // @include        http://ipv6.google.com/
 // @include        http://ipv6.google.com/search*
-// @updateURL      https://github.com/dangoakachan/Remove-Google-Redirection/raw/master/extension/firefox/remove-google-redirection.meta.js 
-// @icon           https://github.com/dangoakachan/Remove-Google-Redirection/raw/master/extension/firefox/icon.png
+// @updateURL      https://raw.githubusercontent.com/kodango/Remove-Google-Redirection/master/extension/greasemonkey/remove-google-redirection.meta.js 
+// @icon           https://raw.githubusercontent.com/kodango/Remove-Google-Redirection/master/extension/greasemonkey/icon.png
 // @run-at         document-end
 // ==/UserScript==
